@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { SurveySet as SurveySetType, ContentStyle, UserSelection, TopicSelection } from "@/types";
 import ContentRow from "./ContentRow";
@@ -82,15 +81,26 @@ const SurveySet = ({
     }
   }, [selectedItems, selectedTopicId, surveySet.contentItems]);
 
-  const handleSelectContent = (contentId: string, style: ContentStyle) => {
-    setSelectedItems(prev => ({
-      ...prev,
-      [contentId]: style
-    }));
+  const handleSelectContent = (contentId: string, style: ContentStyle | null) => {
+    setSelectedItems(prev => {
+      // If style is null (deselection) or already selected, remove it
+      if (style === null || prev[contentId] === style) {
+        const newState = {...prev};
+        delete newState[contentId];
+        return newState;
+      } else {
+        // Otherwise set the new style
+        return {
+          ...prev,
+          [contentId]: style
+        };
+      }
+    });
   };
 
   const handleSelectTopic = (topicId: string) => {
-    setSelectedTopicId(topicId);
+    // Toggle selection - if same topic is clicked again, deselect it
+    setSelectedTopicId(prevId => prevId === topicId ? null : topicId);
   };
 
   const handleSubmit = () => {

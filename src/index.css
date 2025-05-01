@@ -88,3 +88,44 @@
   transform: translateY(-3px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
+
+/* Enhanced radio button styling */
+.radio-button {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-button.selected {
+  border-color: currentColor;
+}
+
+.radio-button .inner-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.radio-button.selected .inner-circle {
+  opacity: 1;
+}
+
+/* Style for the topic bait cards */
+.topic-bait-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.topic-bait-card:hover {
+  transform: translateY(-2px);
+}
