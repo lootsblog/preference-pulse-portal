@@ -70,7 +70,7 @@ export const surveySets: SurveySet[] = [
         imageUrl: 'https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=500&h=300&fit=crop',
         descriptions: {
           simple: 'A period drama set in the competitive world of Regency London high society.',
-          attractive: 'Indulge in the scandalous secrets and romantic pursuits of London's elite.',
+          attractive: 'Indulge in the scandalous secrets and romantic pursuits of London\'s elite.',
           genz: 'The OG reality show but make it 1800s - spilling all the tea about the royal gossip! 👑'
         }
       }
@@ -124,7 +124,7 @@ export const surveySets: SurveySet[] = [
         descriptions: {
           simple: 'Technology that simulates environments and experiences.',
           attractive: 'Immerse yourself in breathtaking digital realms that transcend reality.',
-          genz: 'Living for these other dimensions - catch me in the metaverse flexin' 🌐'
+          genz: 'Living for these other dimensions - catch me in the metaverse flexin\' 🌐'
         }
       },
       {
@@ -134,7 +134,7 @@ export const surveySets: SurveySet[] = [
         descriptions: {
           simple: 'Cars powered by electricity rather than gasoline.',
           attractive: 'Drive the future with zero-emission vehicles combining luxury and sustainability.',
-          genz: 'Fossil fuels? We don't know her. These rides are clean AF and charging is the new gas station 🔋'
+          genz: 'Fossil fuels? We don\'t know her. These rides are clean AF and charging is the new gas station 🔋'
         }
       },
       {
@@ -144,7 +144,7 @@ export const surveySets: SurveySet[] = [
         descriptions: {
           simple: 'Digital helpers that can respond to voice commands and questions.',
           attractive: 'Discover the power of intuitive AI companions designed to enhance your daily routine.',
-          genz: 'These bots are low-key smarter than some people - they're the real MVPs of multitasking 🧠'
+          genz: 'These bots are low-key smarter than some people - they\'re the real MVPs of multitasking 🧠'
         }
       }
     ]
