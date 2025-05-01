@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import { ContentStyle, ContentItem } from "@/types";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface ContentRowProps {
   style: ContentStyle;
@@ -33,7 +35,8 @@ const ContentRow = ({
           hover: 'hover:border-simple',
           title: 'text-simple',
           topicCard: 'bg-simple/10 border-simple/30',
-          selectedTopic: 'bg-simple border-simple text-white shadow-md shadow-simple/20'
+          selectedTopic: 'bg-simple border-simple text-white shadow-md shadow-simple/20',
+          selectedContent: 'border-simple shadow-md shadow-simple/20'
         };
       case 'attractive':
         return {
@@ -42,7 +45,8 @@ const ContentRow = ({
           hover: 'hover:border-attractive',
           title: 'text-attractive',
           topicCard: 'bg-attractive/10 border-attractive/30',
-          selectedTopic: 'bg-attractive border-attractive text-white shadow-md shadow-attractive/20'
+          selectedTopic: 'bg-attractive border-attractive text-white shadow-md shadow-attractive/20',
+          selectedContent: 'border-attractive shadow-md shadow-attractive/20'
         };
       case 'genz':
         return {
@@ -51,7 +55,8 @@ const ContentRow = ({
           hover: 'hover:border-genz',
           title: 'text-genz',
           topicCard: 'bg-genz/10 border-genz/30',
-          selectedTopic: 'bg-genz border-genz text-white shadow-md shadow-genz/20'
+          selectedTopic: 'bg-genz border-genz text-white shadow-md shadow-genz/20',
+          selectedContent: 'border-genz shadow-md shadow-genz/20'
         };
     }
   };
@@ -62,10 +67,16 @@ const ContentRow = ({
     <div className={`p-6 mb-8 rounded-xl ${classes.rowBg}`}>
       {/* Topic Bait Card */}
       <div 
-        className={`mb-4 p-4 border rounded-lg cursor-pointer transition-all duration-200 
+        className={`mb-4 p-4 border rounded-lg cursor-pointer transition-all duration-200 flex items-center gap-3
                    ${topicId === selectedTopicId ? classes.selectedTopic : classes.topicCard}`}
         onClick={() => onSelectTopic(topicId)}
       >
+        <RadioGroup value={selectedTopicId === topicId ? topicId : ""} onValueChange={() => onSelectTopic(topicId)}>
+          <div className="flex items-center space-x-2">
+            <RadioGroupItem value={topicId} id={topicId} />
+          </div>
+        </RadioGroup>
+        
         <h3 className={`font-bold text-xl ${topicId === selectedTopicId ? 'text-white' : classes.title}`}>
           {topicTitle}
         </h3>
@@ -73,31 +84,36 @@ const ContentRow = ({
 
       {/* Content Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        {contentItems.map((item) => (
-          <div 
-            key={item.id}
-            className={`content-card rounded-lg border p-4 ${classes.border} ${classes.hover}`}
-          >
-            <img 
-              src={item.imageUrl} 
-              alt={item.title} 
-              className="w-full h-32 object-cover rounded-md mb-3"
-            />
-            <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
-            <p className="text-sm text-gray-600 mb-4">
-              {item.descriptions[style]}
-            </p>
-            <div className={`custom-radio style-${style} flex justify-center mt-2`}>
-              <input
-                type="radio"
-                name={`content-${item.id}`}
-                id={`${item.id}-${style}`}
-                checked={selectedItems[item.id] === style}
-                onChange={() => onSelectContent(item.id, style)}
+        {contentItems.map((item) => {
+          const isSelected = selectedItems[item.id] === style;
+          
+          return (
+            <div 
+              key={`${item.id}-${style}`}
+              className={`content-card rounded-lg border p-4 transition-all duration-200 
+                        ${isSelected ? classes.selectedContent : classes.border} ${classes.hover}`}
+              onClick={() => onSelectContent(item.id, style)}
+            >
+              <img 
+                src={item.imageUrl} 
+                alt={item.title} 
+                className="w-full h-32 object-cover rounded-md mb-3"
               />
+              <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
+              <p className="text-sm text-gray-600 mb-4">
+                {item.descriptions[style]}
+              </p>
+              <div className="custom-radio flex justify-center mt-2">
+                <RadioGroup value={isSelected ? `${item.id}-${style}` : ""} onValueChange={() => onSelectContent(item.id, style)}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value={`${item.id}-${style}`} id={`${item.id}-${style}`} />
+                    <Label htmlFor={`${item.id}-${style}`} className="sr-only">Select {item.title} in {style} style</Label>
+                  </div>
+                </RadioGroup>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -100,7 +100,7 @@ export const surveySets: SurveySet[] = [
       {
         id: 'tech1',
         title: 'Foldable Phones',
-        imageUrl: 'https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=500&h=300&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&h=300&fit=crop',
         descriptions: {
           simple: 'Smartphones with displays that can be folded in half.',
           attractive: 'Experience the future of mobile devices with revolutionary flexible displays.',
@@ -110,7 +110,7 @@ export const surveySets: SurveySet[] = [
       {
         id: 'tech2',
         title: 'Smart Home Devices',
-        imageUrl: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=500&h=300&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1558002038-1055908a0d25?w=500&h=300&fit=crop',
         descriptions: {
           simple: 'Internet-connected devices that automate home functions.',
           attractive: 'Transform your living space into an intelligent environment responding to your needs.',
@@ -120,7 +120,7 @@ export const surveySets: SurveySet[] = [
       {
         id: 'tech3',
         title: 'Virtual Reality',
-        imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500&h=300&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1535223289827-42f1e9919769?w=500&h=300&fit=crop',
         descriptions: {
           simple: 'Technology that simulates environments and experiences.',
           attractive: 'Immerse yourself in breathtaking digital realms that transcend reality.',
@@ -130,7 +130,7 @@ export const surveySets: SurveySet[] = [
       {
         id: 'tech4',
         title: 'Electric Vehicles',
-        imageUrl: 'https://images.unsplash.com/photo-1500673922987-e212871fec22?w=500&h=300&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=500&h=300&fit=crop',
         descriptions: {
           simple: 'Cars powered by electricity rather than gasoline.',
           attractive: 'Drive the future with zero-emission vehicles combining luxury and sustainability.',
@@ -140,7 +140,7 @@ export const surveySets: SurveySet[] = [
       {
         id: 'tech5',
         title: 'AI Assistants',
-        imageUrl: 'https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=500&h=300&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=500&h=300&fit=crop',
         descriptions: {
           simple: 'Digital helpers that can respond to voice commands and questions.',
           attractive: 'Discover the power of intuitive AI companions designed to enhance your daily routine.',

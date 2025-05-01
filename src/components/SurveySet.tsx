@@ -5,6 +5,7 @@ import ContentRow from "./ContentRow";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { toast } from "sonner";
+import { AlertCircle } from "lucide-react";
 
 interface SurveySetProps {
   surveySet: SurveySetType;
@@ -32,6 +33,15 @@ const SurveySet = ({
   // Validation state
   const [isValid, setIsValid] = useState(false);
   const [showValidationAlert, setShowValidationAlert] = useState(false);
+  
+  // Missing selections tracking
+  const [missingSelections, setMissingSelections] = useState<{
+    contentItems: string[];
+    topic: boolean;
+  }>({
+    contentItems: [],
+    topic: true
+  });
 
   // Initialize with previous selections if available
   useEffect(() => {
@@ -47,15 +57,29 @@ const SurveySet = ({
 
   // Validate selections whenever they change
   useEffect(() => {
-    // All content items must have a selection
-    const allContentSelected = surveySet.contentItems.every(
-      item => selectedItems[item.id]
-    );
+    // Track missing content selections
+    const missingContentItems = surveySet.contentItems
+      .filter(item => !selectedItems[item.id])
+      .map(item => item.title);
     
-    // A topic bait must be selected
-    const hasTopicSelected = !!selectedTopicId;
+    // Check if a topic bait is selected
+    const missingTopic = !selectedTopicId;
+    
+    setMissingSelections({
+      contentItems: missingContentItems,
+      topic: missingTopic
+    });
+    
+    // All content items must have a selection and a topic bait must be selected
+    const allContentSelected = missingContentItems.length === 0;
+    const hasTopicSelected = !missingTopic;
     
     setIsValid(allContentSelected && hasTopicSelected);
+    
+    // Hide validation alert if everything is valid now
+    if (allContentSelected && hasTopicSelected) {
+      setShowValidationAlert(false);
+    }
   }, [selectedItems, selectedTopicId, surveySet.contentItems]);
 
   const handleSelectContent = (contentId: string, style: ContentStyle) => {
@@ -87,7 +111,15 @@ const SurveySet = ({
       onComplete(contentSelections, topicSelection);
     } else {
       setShowValidationAlert(true);
-      toast.error("Please complete all required selections");
+      
+      // Show specific toast message based on what's missing
+      if (missingSelections.contentItems.length > 0 && missingSelections.topic) {
+        toast.error("Please select one style for each content item and choose a topic");
+      } else if (missingSelections.contentItems.length > 0) {
+        toast.error(`Please select a style for ${missingSelections.contentItems.length} content item(s)`);
+      } else if (missingSelections.topic) {
+        toast.error("Please select a topic");
+      }
     }
   };
 
@@ -114,8 +146,21 @@ const SurveySet = ({
       {/* Validation alert */}
       {showValidationAlert && !isValid && (
         <Alert variant="destructive" className="mb-6">
-          <AlertDescription>
-            Please select one content style for each item and choose one topic bait.
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription className="ml-2">
+            {missingSelections.contentItems.length > 0 && (
+              <div>
+                <strong>Missing content selections: </strong>
+                {missingSelections.contentItems.length > 3 
+                  ? `${missingSelections.contentItems.length} items need selection` 
+                  : missingSelections.contentItems.join(', ')}
+              </div>
+            )}
+            {missingSelections.topic && (
+              <div>
+                <strong>Please select one topic</strong> from the available options
+              </div>
+            )}
           </AlertDescription>
         </Alert>
       )}
@@ -157,7 +202,6 @@ const SurveySet = ({
       <div className="flex justify-end mt-8">
         <Button 
           onClick={handleSubmit} 
-          disabled={!isValid}
           className="text-lg px-8 py-6 font-medium hover:shadow-lg transition-all"
         >
           Next Set
