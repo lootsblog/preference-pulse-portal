@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +38,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +92,58 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Custom class for card hover effects */
+  .content-card {
+    @apply transition-all duration-200 hover:shadow-lg;
+  }
+
+  .content-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Custom radio styling */
+  .custom-radio input[type="radio"] {
+    @apply relative appearance-none w-5 h-5 border-2 rounded-full 
+           transition-all duration-200 cursor-pointer;
+  }
+
+  .custom-radio input[type="radio"]:checked::before {
+    content: "";
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+           w-2.5 h-2.5 rounded-full;
+  }
+
+  /* Style variations */
+  .style-simple input[type="radio"] {
+    @apply border-simple;
+  }
+  .style-simple input[type="radio"]:checked {
+    @apply border-simple bg-simple/20;
+  }
+  .style-simple input[type="radio"]:checked::before {
+    @apply bg-simple;
+  }
+  
+  .style-attractive input[type="radio"] {
+    @apply border-attractive;
+  }
+  .style-attractive input[type="radio"]:checked {
+    @apply border-attractive bg-attractive/20;
+  }
+  .style-attractive input[type="radio"]:checked::before {
+    @apply bg-attractive;
+  }
+  
+  .style-genz input[type="radio"] {
+    @apply border-genz;
+  }
+  .style-genz input[type="radio"]:checked {
+    @apply border-genz bg-genz/20;
+  }
+  .style-genz input[type="radio"]:checked::before {
+    @apply bg-genz;
   }
 }
